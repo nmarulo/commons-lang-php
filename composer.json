@@ -1,0 +1,31 @@
+{
+    "name": "softn/commons-lang-php",
+    "description": "Utilidades php",
+    "type": "library",
+    "keywords": [
+        "string",
+        "commons"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nicolás Marulanda P.",
+            "email": "info@softn.red"
+        }
+    ],
+    "minimum-stability": "alpha",
+    "require": {
+        "php": ">=7.1",
+        "phpunit/phpunit": "7.4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "SoftN\\": "src/main/SoftN"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SoftN\\": "src/test/SoftN"
+        }
+    }
+}
