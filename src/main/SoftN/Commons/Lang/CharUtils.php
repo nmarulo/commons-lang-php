@@ -1,7 +1,4 @@
 <?php
-/**
- * CharUtils.php
- */
 
 namespace SoftN\Commons\Lang;
 
@@ -11,6 +8,13 @@ namespace SoftN\Commons\Lang;
  */
 class CharUtils {
     
-
+    //http://www.asciitable.com/
+    const ASCII_CODE_SPACE = 32;
+    
+    const EMPTY            = '';
+    
+    public static function whitespace(): string {
+        return chr(self::ASCII_CODE_SPACE);
+    }
     
 }
