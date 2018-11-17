@@ -12,4 +12,8 @@ class StringUtils {
         return strlen($value) == 0;
     }
     
+    public static function isNotEmpty(?string $value): bool {
+        return !self::isEmpty($value);
+    }
+    
 }
