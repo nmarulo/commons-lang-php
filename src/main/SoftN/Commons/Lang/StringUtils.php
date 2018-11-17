@@ -34,4 +34,17 @@ class StringUtils {
         return !self::isAnyEmpty(...$value);
     }
     
+    public static function isAllEmpty(?string... $value): bool {
+        if (ArrayUtils::isEmpty($value)) {
+            return TRUE;
+        }
+        
+        foreach ($value as $v) {
+            if (self::isNotEmpty($v)) {
+                return FALSE;
+            }
+        }
+        
+        return TRUE;
+    }
 }
