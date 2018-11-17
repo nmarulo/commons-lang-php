@@ -8,6 +8,8 @@ namespace SoftN\Commons\Lang;
  */
 class StringUtils {
     
-
+    public static function isEmpty(?string $value): bool {
+        return strlen($value) == 0;
+    }
     
 }
