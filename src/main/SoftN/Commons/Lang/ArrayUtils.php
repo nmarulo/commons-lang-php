@@ -11,6 +11,8 @@ namespace SoftN\Commons\Lang;
  */
 class ArrayUtils {
     
-
+    public static function isEmpty(?array $array): bool {
+        return count($array) == 0;
+    }
     
 }
