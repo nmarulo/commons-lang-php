@@ -32,4 +32,11 @@ class StringUtilsTest extends TestCase {
         $this->assertFalse(StringUtils::isAnyEmpty("a", "b", 1));
     }
     
+    public function testIsNoneEmpty() {
+        $this->assertFalse(StringUtils::isNoneEmpty(NULL));
+        $this->assertFalse(StringUtils::isNoneEmpty(""));
+        $this->assertFalse(StringUtils::isNoneEmpty(NULL, ""));
+        $this->assertFalse(StringUtils::isNoneEmpty("a", "b", 1, ""));
+        $this->assertTrue(StringUtils::isNoneEmpty("a", "b", 1));
+    }
 }

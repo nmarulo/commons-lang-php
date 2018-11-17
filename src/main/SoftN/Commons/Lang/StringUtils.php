@@ -30,4 +30,8 @@ class StringUtils {
         return FALSE;
     }
     
+    public static function isNoneEmpty(?string... $value): bool {
+        return !self::isAnyEmpty(...$value);
+    }
+    
 }
