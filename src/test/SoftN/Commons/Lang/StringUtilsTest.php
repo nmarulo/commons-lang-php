@@ -68,4 +68,25 @@ class StringUtilsTest extends TestCase {
         $this->assertTrue(StringUtils::isNotBlank("    a         "));
     }
     
+    public function testIsAnyBlank() {
+        $this->assertTrue(StringUtils::isAnyBlank(NULL));
+        $this->assertTrue(StringUtils::isAnyBlank(""));
+        $this->assertTrue(StringUtils::isAnyBlank(NULL, " "));
+        $this->assertTrue(StringUtils::isAnyBlank("a", " "));
+        $this->assertTrue(StringUtils::isAnyBlank("a", "\r\n\t"));
+        $this->assertFalse(StringUtils::isAnyBlank("a", "b\r\n\t"));
+        $this->assertFalse(StringUtils::isAnyBlank("a", " b        "));
+        $this->assertFalse(StringUtils::isAnyBlank("a", "b"));
+    }
+    
+    public function testIsAnyBlankSpace() {
+        $this->assertTrue(StringUtils::isAnyBlankSpace(NULL));
+        $this->assertTrue(StringUtils::isAnyBlankSpace(""));
+        $this->assertTrue(StringUtils::isAnyBlankSpace(NULL, " "));
+        $this->assertTrue(StringUtils::isAnyBlankSpace("a", " "));
+        $this->assertFalse(StringUtils::isAnyBlankSpace("a", "\r\n\t"));
+        $this->assertFalse(StringUtils::isAnyBlankSpace("a", "b\r\n\t"));
+        $this->assertFalse(StringUtils::isAnyBlankSpace("a", " b        "));
+        $this->assertFalse(StringUtils::isAnyBlankSpace("a", "b"));
+    }
 }
