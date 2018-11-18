@@ -58,4 +58,14 @@ class StringUtilsTest extends TestCase {
         $this->assertFalse(StringUtils::isBlank("    a         "));
     }
     
+    public function testIsNotBlank() {
+        $this->assertFalse(StringUtils::isNotBlank(NULL));
+        $this->assertFalse(StringUtils::isNotBlank(""));
+        $this->assertFalse(StringUtils::isNotBlank("               "));
+        $this->assertFalse(StringUtils::isNotBlank("\n\r\t", FALSE));
+        $this->assertTrue(StringUtils::isNotBlank("\n\r\t"));
+        $this->assertTrue(StringUtils::isNotBlank("a"));
+        $this->assertTrue(StringUtils::isNotBlank("    a         "));
+    }
+    
 }

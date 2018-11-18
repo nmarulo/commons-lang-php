@@ -69,4 +69,8 @@ class StringUtils {
         return ctype_space($value);
     }
     
+    public static function isNotBlank(?string $value, bool $onlyCodeSpace = TRUE): bool {
+        return !self::isBlank($value, $onlyCodeSpace);
+    }
+    
 }
