@@ -16,7 +16,8 @@
     "minimum-stability": "alpha",
     "require": {
         "php": ">=7.1",
-        "phpunit/phpunit": "7.4.*"
+        "phpunit/phpunit": "7.4.*",
+        "ext-ctype": "*"
     },
     "autoload": {
         "psr-4": {

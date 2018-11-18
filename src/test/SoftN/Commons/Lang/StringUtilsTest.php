@@ -47,4 +47,15 @@ class StringUtilsTest extends TestCase {
         $this->assertFalse(StringUtils::isAllEmpty("a", "b", 1, ""));
         $this->assertFalse(StringUtils::isAllEmpty("a", "b", 1));
     }
+    
+    public function testIsBlank() {
+        $this->assertTrue(StringUtils::isBlank(NULL));
+        $this->assertTrue(StringUtils::isBlank(""));
+        $this->assertTrue(StringUtils::isBlank("               "));
+        $this->assertTrue(StringUtils::isBlank("\n\r\t", FALSE));
+        $this->assertFalse(StringUtils::isBlank("\n\r\t"));
+        $this->assertFalse(StringUtils::isBlank("a"));
+        $this->assertFalse(StringUtils::isBlank("    a         "));
+    }
+    
 }

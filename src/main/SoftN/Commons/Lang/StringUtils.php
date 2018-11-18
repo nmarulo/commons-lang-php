@@ -47,4 +47,26 @@ class StringUtils {
         
         return TRUE;
     }
+    
+    /**
+     * @param null|string $value
+     * @param bool        $onlyCodeSpace Si es false, también se consideran espacios a
+     *                                   los caracteres de tabulación, tabulación vertical,
+     *                                   alimentación de línea, retorno de carro
+     *                                   y alimentación de formulario.
+     *
+     * @return bool
+     */
+    public static function isBlank(?string $value, bool $onlyCodeSpace = TRUE): bool {
+        if (self::isEmpty($value)) {
+            return TRUE;
+        }
+        
+        if ($onlyCodeSpace) {
+            return self::isEmpty(str_replace(CharUtils::whitespace(), CharUtils::EMPTY, $value));
+        }
+        
+        return ctype_space($value);
+    }
+    
 }
