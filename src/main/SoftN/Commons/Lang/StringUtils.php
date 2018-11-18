@@ -81,6 +81,14 @@ class StringUtils {
         return self::isAnyBlankBase(TRUE, ...$value);
     }
     
+    public static function isNoneBlank(?string... $value): bool {
+        return !self::isAnyBlank(...$value);
+    }
+    
+    public static function isNoneBlankSpace(?string... $value): bool {
+        return !self::isAnyBlankSpace(...$value);
+    }
+    
     private static function isAnyBlankBase(bool $onlyCodeSpace, ?string... $value): bool {
         if (ArrayUtils::isEmpty($value)) {
             return TRUE;
