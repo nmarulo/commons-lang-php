@@ -17,4 +17,8 @@ class CharUtils {
         return chr(self::ASCII_CODE_SPACE);
     }
     
+    public static function isWhitespace(string $char): bool {
+        return ord($char) == self::ASCII_CODE_SPACE || ctype_space($char);
+    }
+    
 }
