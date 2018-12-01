@@ -133,4 +133,12 @@ class StringUtilsTest extends TestCase {
         $this->assertFalse(StringUtils::isAllBlankSpace("a", " b        "));
         $this->assertFalse(StringUtils::isAllBlankSpace("a", "b"));
     }
+    
+    public function testTrim() {
+        $this->assertEmpty(StringUtils::trimWhiteSpaces(NULL));
+        $this->assertEmpty(StringUtils::trimWhiteSpaces(" "));
+        $this->assertNotEmpty(StringUtils::trimWhiteSpaces(" a "));
+        $this->assertNotEmpty(StringUtils::trimWhiteSpaces("\r\n\t"));
+        $this->assertEquals(StringUtils::trimWhiteSpaces(" a   "), "a");
+    }
 }

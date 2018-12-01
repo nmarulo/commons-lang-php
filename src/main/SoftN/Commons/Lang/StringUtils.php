@@ -97,6 +97,10 @@ class StringUtils {
         return self::isAllBlankBase(TRUE, ...$value);
     }
     
+    public static function trimWhiteSpaces(?string $value): ?string {
+        return trim($value, CharUtils::whitespace());
+    }
+    
     private static function isAllBlankBase(bool $onlyCodeSpace, ?string... $value): bool {
         if (ArrayUtils::isEmpty($value)) {
             return TRUE;
