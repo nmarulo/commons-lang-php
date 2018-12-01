@@ -138,6 +138,18 @@ class StringUtils {
         return self::stripEnd(self::stripStart($value, $chars), $chars);
     }
     
+    public static function stripAll(?string $chars, ?string... $values): ?array {
+        if (ArrayUtils::isAllNull($values, TRUE)) {
+            return NULL;
+        }
+        
+        foreach ($values as &$v) {
+            $v = self::strip($v, $chars);
+        }
+        
+        return $values;
+    }
+    
     private static function setPositionStripStart(int &$start, int $len, \Closure $closure): void {
         while ($start < $len && $closure($start)) {
             ++$start;

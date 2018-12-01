@@ -171,4 +171,11 @@ class StringUtilsTest extends TestCase {
         $this->assertEquals("abcxa", StringUtils::strip("xyzabcxa", "xyz"));
         $this->assertEquals("  abc  ", StringUtils::strip("  abc  ", "a"));
     }
+    
+    public function testStripAll() {
+        $this->assertEquals(NULL, StringUtils::stripAll(NULL, NULL));
+        $this->assertEquals(["abc"], StringUtils::stripAll("-", "----abc----"));
+        $this->assertEquals(["abc", "abcxa"], StringUtils::stripAll("xyz", "xyzabcx", "xyzabcxa"));
+        $this->assertEquals(["abc", NULL], StringUtils::stripAll("xyz", "xyzabcx", NULL));
+    }
 }
