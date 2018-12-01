@@ -178,4 +178,10 @@ class StringUtilsTest extends TestCase {
         $this->assertEquals(["abc", "abcxa"], StringUtils::stripAll("xyz", "xyzabcx", "xyzabcxa"));
         $this->assertEquals(["abc", NULL], StringUtils::stripAll("xyz", "xyzabcx", NULL));
     }
+    
+    public function testStripWhitespace() {
+        $this->assertEquals(NULL, StringUtils::stripWhitespace(NULL, NULL));
+        $this->assertEquals(["abc", "-abc-"], StringUtils::stripWhitespace(" abc    ", "-abc-"));
+        $this->assertEquals(["abc", NULL], StringUtils::stripWhitespace("abc", NULL));
+    }
 }

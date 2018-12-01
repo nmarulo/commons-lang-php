@@ -150,6 +150,10 @@ class StringUtils {
         return $values;
     }
     
+    public static function stripWhitespace(?string... $values): ?array {
+        return self::stripAll(NULL, ...$values);
+    }
+    
     private static function setPositionStripStart(int &$start, int $len, \Closure $closure): void {
         while ($start < $len && $closure($start)) {
             ++$start;
