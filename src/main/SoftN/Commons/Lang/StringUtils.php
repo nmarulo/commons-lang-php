@@ -122,7 +122,13 @@ class StringUtils {
         return substr($value, $start);
     }
     
-    
+    public static function stripEnd(?string $value, ?string $chars): ?string {
+        if (self::isEmpty($value)) {
+            return $value;
+        }
+        
+        return strrev(self::stripStart(strrev($value), $chars));
+    }
     
     private static function setPositionStripStart(int &$start, int $len, \Closure $closure): void {
         while ($start < $len && $closure($start)) {

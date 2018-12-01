@@ -153,5 +153,14 @@ class StringUtilsTest extends TestCase {
         $this->assertEquals("abc", StringUtils::stripStart("----abc", "-"));
     }
     
-    
+    public function testStripEnd() {
+        $this->assertEquals(NULL, StringUtils::stripEnd(NULL, ""));
+        $this->assertEquals("", StringUtils::stripEnd("", ""));
+        $this->assertEquals("abc", StringUtils::stripEnd("abc", ""));
+        $this->assertEquals("abc", StringUtils::stripEnd("abc  ", null));
+        $this->assertEquals("   abc", StringUtils::stripEnd("   abc", null));
+        $this->assertEquals("  abc", StringUtils::stripEnd("  abcxyz", "xyz"));
+        $this->assertEquals("  abcyz", StringUtils::stripEnd("  abcyzx", "x"));
+        $this->assertEquals("abc", StringUtils::stripEnd("abc----", "-"));
+    }
 }
