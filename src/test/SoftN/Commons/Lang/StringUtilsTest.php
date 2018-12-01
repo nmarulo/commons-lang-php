@@ -146,8 +146,8 @@ class StringUtilsTest extends TestCase {
         $this->assertEquals(NULL, StringUtils::stripStart(NULL, ""));
         $this->assertEquals("", StringUtils::stripStart("", ""));
         $this->assertEquals("abc", StringUtils::stripStart("abc", ""));
-        $this->assertEquals("abc", StringUtils::stripStart("  abc", null));
-        $this->assertEquals("abc   ", StringUtils::stripStart("abc   ", null));
+        $this->assertEquals("abc", StringUtils::stripStart("  abc", NULL));
+        $this->assertEquals("abc   ", StringUtils::stripStart("abc   ", NULL));
         $this->assertEquals("abc  ", StringUtils::stripStart("xyzabc  ", "xyz"));
         $this->assertEquals("yzabc  ", StringUtils::stripStart("xyzabc  ", "x"));
         $this->assertEquals("abc", StringUtils::stripStart("----abc", "-"));
@@ -157,10 +157,18 @@ class StringUtilsTest extends TestCase {
         $this->assertEquals(NULL, StringUtils::stripEnd(NULL, ""));
         $this->assertEquals("", StringUtils::stripEnd("", ""));
         $this->assertEquals("abc", StringUtils::stripEnd("abc", ""));
-        $this->assertEquals("abc", StringUtils::stripEnd("abc  ", null));
-        $this->assertEquals("   abc", StringUtils::stripEnd("   abc", null));
+        $this->assertEquals("abc", StringUtils::stripEnd("abc  ", NULL));
+        $this->assertEquals("   abc", StringUtils::stripEnd("   abc", NULL));
         $this->assertEquals("  abc", StringUtils::stripEnd("  abcxyz", "xyz"));
         $this->assertEquals("  abcyz", StringUtils::stripEnd("  abcyzx", "x"));
         $this->assertEquals("abc", StringUtils::stripEnd("abc----", "-"));
+    }
+    
+    public function testStrip() {
+        $this->assertEquals(NULL, StringUtils::strip(NULL, ""));
+        $this->assertEquals("abc", StringUtils::strip("----abc----", "-"));
+        $this->assertEquals("abc", StringUtils::strip("xyzabcx", "xyz"));
+        $this->assertEquals("abcxa", StringUtils::strip("xyzabcxa", "xyz"));
+        $this->assertEquals("  abc  ", StringUtils::strip("  abc  ", "a"));
     }
 }
