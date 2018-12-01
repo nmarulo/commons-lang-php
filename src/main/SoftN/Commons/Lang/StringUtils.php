@@ -101,6 +101,35 @@ class StringUtils {
         return trim($value, CharUtils::whitespace());
     }
     
+    public static function stripStart(?string $value, ?string $chars): ?string {
+        if (self::isEmpty($value)) {
+            return $value;
+        }
+        
+        $len   = strlen($value);
+        $start = 0;
+        
+        if (is_null($chars) || CharUtils::isWhitespace($chars)) {
+            self::setPositionStripStart($start, $len, function($start) use ($value) {
+                return CharUtils::isWhitespace($value[$start]);
+            });
+        } else {
+            self::setPositionStripStart($start, $len, function($start) use ($chars, $value) {
+                return strpos($chars, $value[$start]) !== FALSE;
+            });
+        }
+        
+        return substr($value, $start);
+    }
+    
+    
+    
+    private static function setPositionStripStart(int &$start, int $len, \Closure $closure): void {
+        while ($start < $len && $closure($start)) {
+            ++$start;
+        }
+    }
+    
     private static function isAllBlankBase(bool $onlyCodeSpace, ?string... $value): bool {
         if (ArrayUtils::isEmpty($value)) {
             return TRUE;

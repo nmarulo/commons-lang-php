@@ -141,4 +141,17 @@ class StringUtilsTest extends TestCase {
         $this->assertNotEmpty(StringUtils::trimWhiteSpaces("\r\n\t"));
         $this->assertEquals(StringUtils::trimWhiteSpaces(" a   "), "a");
     }
+    
+    public function testStripStart() {
+        $this->assertEquals(NULL, StringUtils::stripStart(NULL, ""));
+        $this->assertEquals("", StringUtils::stripStart("", ""));
+        $this->assertEquals("abc", StringUtils::stripStart("abc", ""));
+        $this->assertEquals("abc", StringUtils::stripStart("  abc", null));
+        $this->assertEquals("abc   ", StringUtils::stripStart("abc   ", null));
+        $this->assertEquals("abc  ", StringUtils::stripStart("xyzabc  ", "xyz"));
+        $this->assertEquals("yzabc  ", StringUtils::stripStart("xyzabc  ", "x"));
+        $this->assertEquals("abc", StringUtils::stripStart("----abc", "-"));
+    }
+    
+    
 }
