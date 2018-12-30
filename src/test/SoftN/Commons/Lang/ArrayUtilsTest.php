@@ -28,5 +28,15 @@ class ArrayUtilsTest extends TestCase {
         $this->assertFalse(ArrayUtils::isAllNull(["a", [NULL, ["a"]]]));
     }
     
+    public function testIsAnyNull() {
+        $this->assertTrue(ArrayUtils::isAnyNull(NULL));
+        $this->assertTrue(ArrayUtils::isAnyNull([NULL]));
+        $this->assertTrue(ArrayUtils::isAnyNull(["", NULL]));
+        $this->assertTrue(ArrayUtils::isAnyNull(["a", [NULL]], TRUE));
+        $this->assertTrue(ArrayUtils::isAnyNull(["a", ["b", ["c", ["d", ["f", NULL]]]]], TRUE));
+        $this->assertFalse(ArrayUtils::isAnyNull(["a", ["b", ["c", ["d", ["f", NULL]]]]]));
+        $this->assertFalse(ArrayUtils::isAnyNull(["a", [NULL]]));
+        $this->assertFalse(ArrayUtils::isAnyNull(["a", [NULL, ["a"]]]));
+    }
     
 }

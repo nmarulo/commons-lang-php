@@ -29,5 +29,18 @@ class ArrayUtils {
         return TRUE;
     }
     
+    public static function isAnyNull(?array $value, bool $recursive = FALSE): bool {
+        if (ArrayUtils::isEmpty($value)) {
+            return TRUE;
+        }
+        
+        foreach ($value as $v) {
+            if (is_null($v) || ($recursive && is_array($v) && self::isAnyNull($v, $recursive))) {
+                return TRUE;
+            }
+        }
+        
+        return FALSE;
+    }
     
 }
