@@ -169,6 +169,23 @@ class StringUtils {
     }
     
     public static function equals(?string $first, ?string $second): bool {
+        return self::equalsBase($first, $second, function($first, $second) {
+            return strcmp($first, $second) === 0;
+        });
+    }
+    
+    public static function equalsIgnoreCase(?string $first, ?string $second, bool $ignoreAccents = FALSE): bool {
+        if ($ignoreAccents) {
+            $first  = self::stripAccents($first);
+            $second = self::stripAccents($second);
+        }
+        
+        return self::equalsBase($first, $second, function($first, $second) {
+            return strcasecmp($first, $second) === 0;
+        });
+    }
+    
+    private static function equalsBase(?string $first, ?string $second, \Closure $closure): bool {
         if ($first === $second) {
             return TRUE;
         }
@@ -177,7 +194,7 @@ class StringUtils {
             return FALSE;
         }
         
-        return strcmp($first, $second) === 0;
+        return $closure($first, $second);
     }
     
     private static function setPositionStripStart(int &$start, int $len, \Closure $closure): void {
