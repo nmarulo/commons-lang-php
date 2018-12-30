@@ -184,4 +184,12 @@ class StringUtilsTest extends TestCase {
         $this->assertEquals(["abc", "-abc-"], StringUtils::stripWhitespace(" abc    ", "-abc-"));
         $this->assertEquals(["abc", NULL], StringUtils::stripWhitespace("abc", NULL));
     }
+    
+    public function testStripAccents() {
+        $this->assertEquals(NULL, StringUtils::stripAccents(NULL));
+        $this->assertEquals("", StringUtils::stripAccents(""));
+        $this->assertEquals("aeiou", StringUtils::stripAccents("aeiou"));
+        $this->assertEquals("aeiou", StringUtils::stripAccents("aéiou"));
+        $this->assertEquals("aeiou", StringUtils::stripAccents("a&eacute;iou"));
+    }
 }

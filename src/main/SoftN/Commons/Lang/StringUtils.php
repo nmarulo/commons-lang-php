@@ -154,6 +154,20 @@ class StringUtils {
         return self::stripAll(NULL, ...$values);
     }
     
+    public static function stripAccents(?string $value): ?string {
+        if (self::isEmpty($value)) {
+            return $value;
+        }
+        
+        $result = strtr(html_entity_decode($value), CharUtils::ACCENTS);
+        
+        if ($result === FALSE) {
+            return $value;
+        }
+        
+        return $result;
+    }
+    
     private static function setPositionStripStart(int &$start, int $len, \Closure $closure): void {
         while ($start < $len && $closure($start)) {
             ++$start;
