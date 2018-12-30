@@ -241,4 +241,27 @@ class StringUtilsTest extends TestCase {
         $this->assertTrue(StringUtils::compare("ab", "ab ") < 0);
         $this->assertTrue(StringUtils::compare("abc", "ab ") > 0);
     }
+    
+    public function testCompareIgnoreCase() {
+        $this->assertEquals(0, StringUtils::compareIgnoreCase(NULL, NULL));
+        $this->assertEquals(0, StringUtils::compareIgnoreCase("", ""));
+        $this->assertEquals(0, StringUtils::compareIgnoreCase("abc", "abc"));
+        $this->assertEquals(0, StringUtils::compareIgnoreCase("abc", "ABC"));
+        $this->assertTrue(StringUtils::compareIgnoreCase(NULL, "a") < 0);
+        $this->assertTrue(StringUtils::compareIgnoreCase(NULL, "a", FALSE) > 0);
+        $this->assertTrue(StringUtils::compareIgnoreCase("a", NULL) > 0);
+        $this->assertTrue(StringUtils::compareIgnoreCase("a", NULL, FALSE) < 0);
+        $this->assertTrue(StringUtils::compareIgnoreCase("a", "b") < 0);
+        $this->assertTrue(StringUtils::compareIgnoreCase("b", "a") > 0);
+        $this->assertTrue(StringUtils::compareIgnoreCase("a", "B") < 0);
+        $this->assertTrue(StringUtils::compareIgnoreCase("A", "b") < 0);
+        $this->assertTrue(StringUtils::compareIgnoreCase("abc", "abd") < 0);
+        $this->assertTrue(StringUtils::compareIgnoreCase("ab", "abc") < 0);
+        $this->assertTrue(StringUtils::compareIgnoreCase("ab", "ab ") < 0);
+        $this->assertTrue(StringUtils::compareIgnoreCase("abc", "ab ") > 0);
+        $this->assertTrue(StringUtils::compareIgnoreCase("abc", "ABD") < 0);
+        $this->assertTrue(StringUtils::compareIgnoreCase("ab", "ABC") < 0);
+        $this->assertTrue(StringUtils::compareIgnoreCase("ab", "AB ") < 0);
+        $this->assertTrue(StringUtils::compareIgnoreCase("abc", "AB ") > 0);
+    }
 }

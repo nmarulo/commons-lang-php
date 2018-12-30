@@ -191,8 +191,12 @@ class StringUtils {
         return self::compareBase(strcmp($first, $second), $first, $second, $nullIsLess);
     }
     
-    private static function compareBase(int $result, ?string $first, ?string $second, bool $nullIsLess = TRUE): int {
-        if ($result === 0) {
+    public static function compareIgnoreCase(?string $first, ?string $second, bool $nullIsLess = TRUE): int {
+        return self::compareBase(strcasecmp($first, $second), $first, $second, $nullIsLess);
+    }
+    
+    private static function compareBase(int $compareResult, ?string $first, ?string $second, bool $nullIsLess = TRUE): int {
+        if ($compareResult === 0) {
             return 0;
         }
         
@@ -204,7 +208,7 @@ class StringUtils {
             return $nullIsLess ? 1 : self::INDEX_NOT_FOUND;
         }
         
-        return $result > 0 ? 1 : self::INDEX_NOT_FOUND;
+        return $compareResult > 0 ? 1 : self::INDEX_NOT_FOUND;
     }
     
     private static function equalsBase(?string $first, ?string $second, \Closure $closure): bool {
