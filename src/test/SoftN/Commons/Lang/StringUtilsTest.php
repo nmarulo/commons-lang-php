@@ -192,4 +192,15 @@ class StringUtilsTest extends TestCase {
         $this->assertEquals("aeiou", StringUtils::stripAccents("aéiou"));
         $this->assertEquals("aeiou", StringUtils::stripAccents("a&eacute;iou"));
     }
+    
+    public function testEquals() {
+        $this->assertTrue(StringUtils::equals(NULL, NULL));
+        $this->assertTrue(StringUtils::equals("", ""));
+        $this->assertTrue(StringUtils::equals("abc", "abc"));
+        $this->assertFalse(StringUtils::equals("abc", "abcde"));
+        $this->assertFalse(StringUtils::equals("abc", "cab"));
+        $this->assertFalse(StringUtils::equals("abc", "ABC"));
+        $this->assertFalse(StringUtils::equals("abc", null));
+        $this->assertFalse(StringUtils::equals("abc", ""));
+    }
 }

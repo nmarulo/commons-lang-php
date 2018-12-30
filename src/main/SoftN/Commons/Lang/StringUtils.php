@@ -168,6 +168,18 @@ class StringUtils {
         return $result;
     }
     
+    public static function equals(?string $first, ?string $second): bool {
+        if ($first === $second) {
+            return TRUE;
+        }
+        
+        if (strlen($first) != strlen($second)) {
+            return FALSE;
+        }
+        
+        return strcmp($first, $second) === 0;
+    }
+    
     private static function setPositionStripStart(int &$start, int $len, \Closure $closure): void {
         while ($start < $len && $closure($start)) {
             ++$start;
