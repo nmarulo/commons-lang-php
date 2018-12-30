@@ -8,6 +8,8 @@ namespace SoftN\Commons\Lang;
  */
 class StringUtils {
     
+    const INDEX_NOT_FOUND = -1;
+    
     public static function isEmpty(?string $value): bool {
         return strlen($value) == 0;
     }
@@ -183,6 +185,26 @@ class StringUtils {
         return self::equalsBase($first, $second, function($first, $second) {
             return strcasecmp($first, $second) === 0;
         });
+    }
+    
+    public static function compare(?string $first, ?string $second, bool $nullIsLess = TRUE): int {
+        return self::compareBase(strcmp($first, $second), $first, $second, $nullIsLess);
+    }
+    
+    private static function compareBase(int $result, ?string $first, ?string $second, bool $nullIsLess = TRUE): int {
+        if ($result === 0) {
+            return 0;
+        }
+        
+        if (is_null($first)) {
+            return $nullIsLess ? self::INDEX_NOT_FOUND : 1;
+        }
+        
+        if (is_null($second)) {
+            return $nullIsLess ? 1 : self::INDEX_NOT_FOUND;
+        }
+        
+        return $result > 0 ? 1 : self::INDEX_NOT_FOUND;
     }
     
     private static function equalsBase(?string $first, ?string $second, \Closure $closure): bool {

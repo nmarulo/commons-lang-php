@@ -224,4 +224,21 @@ class StringUtilsTest extends TestCase {
         $this->assertFalse(StringUtils::equalsIgnoreCase("abc", NULL));
         $this->assertFalse(StringUtils::equalsIgnoreCase("abc", ""));
     }
+    
+    public function testCompare() {
+        $this->assertEquals(0, StringUtils::compare(NULL, NULL));
+        $this->assertEquals(0, StringUtils::compare("", ""));
+        $this->assertEquals(0, StringUtils::compare("abc", "abc"));
+        $this->assertTrue(StringUtils::compare(NULL, "a") < 0);
+        $this->assertTrue(StringUtils::compare(NULL, "a", FALSE) > 0);
+        $this->assertTrue(StringUtils::compare("a", NULL) > 0);
+        $this->assertTrue(StringUtils::compare("a", NULL, FALSE) < 0);
+        $this->assertTrue(StringUtils::compare("a", "b") < 0);
+        $this->assertTrue(StringUtils::compare("b", "a") > 0);
+        $this->assertTrue(StringUtils::compare("a", "B") > 0);
+        $this->assertTrue(StringUtils::compare("abc", "abd") < 0);
+        $this->assertTrue(StringUtils::compare("ab", "abc") < 0);
+        $this->assertTrue(StringUtils::compare("ab", "ab ") < 0);
+        $this->assertTrue(StringUtils::compare("abc", "ab ") > 0);
+    }
 }
