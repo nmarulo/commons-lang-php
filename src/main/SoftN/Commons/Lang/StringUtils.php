@@ -209,10 +209,6 @@ class StringUtils {
     
     public static function indexOf(?string $value, ?string $search, int $startPos = 0): int {
         return self::indexOfBase($value, $search, $startPos, function($value, $search, $startPos) {
-            if ($startPos > 0) {
-                $startPos = -1 * (strlen($value) - $startPos);
-            }
-            
             return strpos($value, $search, $startPos);
         });
     }
