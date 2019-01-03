@@ -301,6 +301,12 @@ class StringUtilsTest extends TestCase {
         $this->assertEquals(-1, StringUtils::indexOf(NULL, "a"));
         $this->assertEquals(-1, StringUtils::indexOf("aabbccdefgh", 'ccc'));
         $this->assertEquals(-1, StringUtils::indexOf("qqwweeqqwwee", 'q', 100));
+        $this->assertEquals(-1, StringUtils::indexOf("aabbccdefgh", 'B'));
+        $this->assertEquals(-1, StringUtils::indexOf("aabbccdefgh", 'cC'));
+        $this->assertEquals(-1, StringUtils::indexOf("aabbccdefgh", 'A'));
+        $this->assertEquals(-1, StringUtils::indexOf("qqwweeqqwwee", 'Q', 3));
+        $this->assertEquals(-1, StringUtils::indexOf("qqwweeqqwwee", 'Q', 0));
+        $this->assertEquals(-1, StringUtils::indexOf("qqwweeqqwwee", 'Q', -1));
         $this->assertEquals(0, StringUtils::indexOf(" ", " "));
         $this->assertEquals(1, StringUtils::indexOf("a b", " "));
         $this->assertEquals(2, StringUtils::indexOf("aabbccdefgh", 'b'));
@@ -319,6 +325,12 @@ class StringUtilsTest extends TestCase {
         $this->assertEquals(-1, StringUtils::lastIndexOf(NULL, "a"));
         $this->assertEquals(-1, StringUtils::lastIndexOf("aabbccdefgh", 'ccc'));
         $this->assertEquals(-1, StringUtils::lastIndexOf("qqwweeqqwwee", 'q', 100));
+        $this->assertEquals(-1, StringUtils::lastIndexOf("aabbccdefgh", 'B'));
+        $this->assertEquals(-1, StringUtils::lastIndexOf("aabbccdefgh", 'cC'));
+        $this->assertEquals(-1, StringUtils::lastIndexOf("aabbccdefgh", 'A'));
+        $this->assertEquals(-1, StringUtils::lastIndexOf("qqwweeqqwwee", 'Q', 3));
+        $this->assertEquals(-1, StringUtils::lastIndexOf("qqwweeqqwwee", 'Q', 0));
+        $this->assertEquals(-1, StringUtils::lastIndexOf("qqwweeqqwwee", 'Q', -1));
         $this->assertEquals(0, StringUtils::lastIndexOf(" ", " "));
         $this->assertEquals(1, StringUtils::lastIndexOf("a b", " "));
         $this->assertEquals(3, StringUtils::lastIndexOf("aabbccdefgh", 'b'));
