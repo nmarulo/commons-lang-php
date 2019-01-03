@@ -279,4 +279,17 @@ class StringUtilsTest extends TestCase {
         $this->assertTrue(StringUtils::equalsAny("abc", "def", "abc"));
         $this->assertTrue(StringUtils::equalsAny("abc", "abc"));
     }
+    
+    public function testEqualsAnyIgnoreCase() {
+        $this->assertFalse(StringUtils::equalsAnyIgnoreCase("abc"));
+        $this->assertFalse(StringUtils::equalsAnyIgnoreCase("abc", NULL));
+        $this->assertFalse(StringUtils::equalsAnyIgnoreCase("abc", NULL, NULL));
+        $this->assertFalse(StringUtils::equalsAnyIgnoreCase("abc", ""));
+        $this->assertFalse(StringUtils::equalsAnyIgnoreCase(NULL, ""));
+        $this->assertFalse(StringUtils::equalsAnyIgnoreCase("abc", "def"));
+        $this->assertTrue(StringUtils::equalsAnyIgnoreCase("abc", "ABC"));
+        $this->assertTrue(StringUtils::equalsAnyIgnoreCase(NULL, NULL, NULL));
+        $this->assertTrue(StringUtils::equalsAnyIgnoreCase("abc", "def", "abc"));
+        $this->assertTrue(StringUtils::equalsAnyIgnoreCase("abc", "abc"));
+    }
 }

@@ -196,12 +196,24 @@ class StringUtils {
     }
     
     public static function equalsAny(?string $string, ?string... $searchStrings): bool {
+        return self::equalsAnyBase($string, function($string, $value) {
+            return self::equals($string, $value);
+        }, ...$searchStrings);
+    }
+    
+    public static function equalsAnyIgnoreCase(?string $string, ?string... $searchStrings): bool {
+        return self::equalsAnyBase($string, function($string, $value) {
+            return self::equalsIgnoreCase($string, $value);
+        }, ...$searchStrings);
+    }
+    
+    private static function equalsAnyBase(?string $string, \Closure $closure, ?string... $searchStrings): bool {
         if (ArrayUtils::isEmpty($searchStrings)) {
             return FALSE;
         }
         
         foreach ($searchStrings as $value) {
-            if (self::equals($string, $value)) {
+            if ($closure($string, $value)) {
                 return TRUE;
             }
         }
