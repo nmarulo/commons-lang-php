@@ -340,4 +340,28 @@ class StringUtilsTest extends TestCase {
         $this->assertEquals(7, StringUtils::lastIndexOf("qqwweeqqwwee", 'q', 10));
         $this->assertEquals(7, StringUtils::lastIndexOf("qqwweeqqwwee", 'q', -1));
     }
+    
+    public function testIndexOfIgnoreCase() {
+        $this->assertEquals(-1, StringUtils::indexOfIgnoreCase(NULL, NULL));
+        $this->assertEquals(-1, StringUtils::indexOfIgnoreCase("", ""));
+        $this->assertEquals(-1, StringUtils::indexOfIgnoreCase("aabbccdefgh", NULL));
+        $this->assertEquals(-1, StringUtils::indexOfIgnoreCase("aabbccdefgh", ""));
+        $this->assertEquals(-1, StringUtils::indexOfIgnoreCase(NULL, "a"));
+        $this->assertEquals(-1, StringUtils::indexOfIgnoreCase("aabbccdefgh", 'ccc'));
+        $this->assertEquals(-1, StringUtils::indexOfIgnoreCase("qqwweeqqwwee", 'q', 100));
+        $this->assertEquals(0, StringUtils::indexOfIgnoreCase(" ", " "));
+        $this->assertEquals(1, StringUtils::indexOfIgnoreCase("a b", " "));
+        $this->assertEquals(2, StringUtils::indexOfIgnoreCase("aabbccdefgh", 'b'));
+        $this->assertEquals(4, StringUtils::indexOfIgnoreCase("aabbccdefgh", 'cc'));
+        $this->assertEquals(0, StringUtils::indexOfIgnoreCase("aabbccdefgh", 'a'));
+        $this->assertEquals(6, StringUtils::indexOfIgnoreCase("qqwweeqqwwee", 'q', 3));
+        $this->assertEquals(0, StringUtils::indexOfIgnoreCase("qqwweeqqwwee", 'q', 0));
+        $this->assertEquals(0, StringUtils::indexOfIgnoreCase("qqwweeqqwwee", 'q', -1));
+        $this->assertEquals(2, StringUtils::indexOfIgnoreCase("aabbccdefgh", 'B'));
+        $this->assertEquals(4, StringUtils::indexOfIgnoreCase("aabbccdefgh", 'cC'));
+        $this->assertEquals(0, StringUtils::indexOfIgnoreCase("aabbccdefgh", 'A'));
+        $this->assertEquals(6, StringUtils::indexOfIgnoreCase("qqwweeqqwwee", 'Q', 3));
+        $this->assertEquals(0, StringUtils::indexOfIgnoreCase("qqwweeqqwwee", 'Q', 0));
+        $this->assertEquals(0, StringUtils::indexOfIgnoreCase("qqwweeqqwwee", 'Q', -1));
+    }
 }

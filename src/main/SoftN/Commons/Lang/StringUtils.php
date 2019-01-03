@@ -223,6 +223,12 @@ class StringUtils {
         });
     }
     
+    public static function indexOfIgnoreCase(?string $value, ?string $search, int $startPos = 0): int {
+        return self::indexOfBase($value, $search, $startPos, function($value, $search, $startPos) {
+            return stripos($value, $search, $startPos);
+        });
+    }
+    
     private static function indexOfBase(?string $value, ?string $search, int $pos, \Closure $closure): int {
         if (self::isAnyEmpty($value, $search) || $pos > strlen($value)) {
             return self::INDEX_NOT_FOUND;
