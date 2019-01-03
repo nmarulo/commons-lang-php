@@ -171,7 +171,9 @@ class StringUtils {
     }
     
     public static function equals(?string $first, ?string $second): bool {
-        return self::equalsBase($first, $second, self::compare($first, $second));
+        return self::equalsBase($first, $second, function($first, $second) {
+            return self::compare($first, $second);
+        });
     }
     
     public static function equalsIgnoreCase(?string $first, ?string $second, bool $ignoreAccents = FALSE): bool {
@@ -180,7 +182,9 @@ class StringUtils {
             $second = self::stripAccents($second);
         }
         
-        return self::equalsBase($first, $second, self::compareIgnoreCase($first, $second));
+        return self::equalsBase($first, $second, function($first, $second) {
+            return self::compareIgnoreCase($first, $second);
+        });
     }
     
     public static function compare(?string $first, ?string $second, bool $nullIsLess = TRUE): int {
@@ -207,16 +211,22 @@ class StringUtils {
         return $compareResult > 0 ? 1 : self::INDEX_NOT_FOUND;
     }
     
-    private static function equalsBase(?string $first, ?string $second, int $compareResult): bool {
+    private static function equalsBase(?string $first, ?string $second, \Closure $closure): bool {
         if ($first === $second) {
             return TRUE;
         }
         
-        if (strlen($first) != strlen($second)) {
+        if (strlen($first) != strlen($second) || (self::compareStrict($first, $second, $closure))) {
             return FALSE;
         }
         
-        return $compareResult === 0;
+        return $closure($first, $second) === 0;
+    }
+    
+    private static function compareStrict(?string $first, ?string $second, \Closure $closure): bool {
+        $auxStr = [$first, $second];
+        
+        return $closure($first, $second) === 0 && ArrayUtils::isAnyNull($auxStr) && !ArrayUtils::isAllNull($auxStr);
     }
     
     private static function setPositionStripStart(int &$start, int $len, \Closure $closure): void {

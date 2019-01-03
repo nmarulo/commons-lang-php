@@ -205,6 +205,7 @@ class StringUtilsTest extends TestCase {
         $this->assertFalse(StringUtils::equals("abc", "cab"));
         $this->assertFalse(StringUtils::equals("abc", "ABC"));
         $this->assertFalse(StringUtils::equals("abc", NULL));
+        $this->assertFalse(StringUtils::equals(NULL, ""));
         $this->assertFalse(StringUtils::equals("abc", ""));
     }
     
@@ -222,6 +223,7 @@ class StringUtilsTest extends TestCase {
         $this->assertFalse(StringUtils::equalsIgnoreCase("abc", "abcde"));
         $this->assertFalse(StringUtils::equalsIgnoreCase("abc", "cab"));
         $this->assertFalse(StringUtils::equalsIgnoreCase("abc", NULL));
+        $this->assertFalse(StringUtils::equalsIgnoreCase(NULL, ""));
         $this->assertFalse(StringUtils::equalsIgnoreCase("abc", ""));
     }
     
