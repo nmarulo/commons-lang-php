@@ -292,4 +292,22 @@ class StringUtilsTest extends TestCase {
         $this->assertTrue(StringUtils::equalsAnyIgnoreCase("abc", "def", "abc"));
         $this->assertTrue(StringUtils::equalsAnyIgnoreCase("abc", "abc"));
     }
+    
+    public function testIndexOf() {
+        $this->assertEquals(-1, StringUtils::indexOf(NULL, NULL));
+        $this->assertEquals(-1, StringUtils::indexOf("", ""));
+        $this->assertEquals(-1, StringUtils::indexOf("aabbccdefgh", NULL));
+        $this->assertEquals(-1, StringUtils::indexOf("aabbccdefgh", ""));
+        $this->assertEquals(-1, StringUtils::indexOf(NULL, "a"));
+        $this->assertEquals(-1, StringUtils::indexOf("aabbccdefgh", 'ccc'));
+        $this->assertEquals(-1, StringUtils::indexOf("qqwweeqqwwee", 'q', 100));
+        $this->assertEquals(0, StringUtils::indexOf(" ", " "));
+        $this->assertEquals(1, StringUtils::indexOf("a b", " "));
+        $this->assertEquals(2, StringUtils::indexOf("aabbccdefgh", 'b'));
+        $this->assertEquals(4, StringUtils::indexOf("aabbccdefgh", 'cc'));
+        $this->assertEquals(0, StringUtils::indexOf("aabbccdefgh", 'a'));
+        $this->assertEquals(6, StringUtils::indexOf("qqwweeqqwwee", 'q', 3));
+        $this->assertEquals(0, StringUtils::indexOf("qqwweeqqwwee", 'q', 0));
+        $this->assertEquals(0, StringUtils::indexOf("qqwweeqqwwee", 'q', -1));
+    }
 }

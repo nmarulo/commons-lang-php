@@ -207,6 +207,16 @@ class StringUtils {
         }, ...$searchStrings);
     }
     
+    public static function indexOf(?string $value, ?string $search, int $startPos = 0): int {
+        if (self::isAnyEmpty($value, $search) || $startPos > strlen($value)) {
+            return self::INDEX_NOT_FOUND;
+        }
+        
+        $result = strpos($value, $search, $startPos < 0 ? 0 : $startPos);
+        
+        return $result === FALSE ? self::INDEX_NOT_FOUND : $result;
+    }
+    
     private static function equalsAnyBase(?string $string, \Closure $closure, ?string... $searchStrings): bool {
         if (ArrayUtils::isEmpty($searchStrings)) {
             return FALSE;
