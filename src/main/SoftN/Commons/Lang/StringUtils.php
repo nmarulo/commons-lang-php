@@ -208,11 +208,33 @@ class StringUtils {
     }
     
     public static function indexOf(?string $value, ?string $search, int $startPos = 0): int {
-        if (self::isAnyEmpty($value, $search) || $startPos > strlen($value)) {
+        return self::indexOfBase($value, $search, $startPos, function($value, $search, $startPos) {
+            if ($startPos > 0) {
+                $startPos = -1 * (strlen($value) - $startPos);
+            }
+            
+            return strpos($value, $search, $startPos);
+        });
+    }
+    
+    public static function lastIndexOf(?string $value, ?string $search, int $endPos = 0): int {
+        return self::indexOfBase($value, $search, $endPos, function($value, $search, $endPos) {
+            if ($endPos > 0) {
+                $endPos = -1 * (strlen($value) - $endPos);
+            }
+            
+            return strrpos($value, $search, $endPos);
+        });
+    }
+    
+    private static function indexOfBase(?string $value, ?string $search, int $pos, \Closure $closure): int {
+        if (self::isAnyEmpty($value, $search) || $pos > strlen($value)) {
             return self::INDEX_NOT_FOUND;
         }
         
-        $result = strpos($value, $search, $startPos < 0 ? 0 : $startPos);
+        $pos = $pos < 0 ? 0 : $pos;
+        
+        $result = $closure($value, $search, $pos);
         
         return $result === FALSE ? self::INDEX_NOT_FOUND : $result;
     }
