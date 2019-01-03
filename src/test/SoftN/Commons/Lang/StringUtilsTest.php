@@ -364,4 +364,28 @@ class StringUtilsTest extends TestCase {
         $this->assertEquals(0, StringUtils::indexOfIgnoreCase("qqwweeqqwwee", 'Q', 0));
         $this->assertEquals(0, StringUtils::indexOfIgnoreCase("qqwweeqqwwee", 'Q', -1));
     }
+    
+    public function testLastIndexOfIgnoreCase() {
+        $this->assertEquals(-1, StringUtils::lastIndexOfIgnoreCase(NULL, NULL));
+        $this->assertEquals(-1, StringUtils::lastIndexOfIgnoreCase("", ""));
+        $this->assertEquals(-1, StringUtils::lastIndexOfIgnoreCase("aabbccdefgh", NULL));
+        $this->assertEquals(-1, StringUtils::lastIndexOfIgnoreCase("aabbccdefgh", ""));
+        $this->assertEquals(-1, StringUtils::lastIndexOfIgnoreCase(NULL, "a"));
+        $this->assertEquals(-1, StringUtils::lastIndexOfIgnoreCase("aabbccdefgh", 'ccc'));
+        $this->assertEquals(-1, StringUtils::lastIndexOfIgnoreCase("qqwweeqqwwee", 'q', 100));
+        $this->assertEquals(0, StringUtils::lastIndexOfIgnoreCase(" ", " "));
+        $this->assertEquals(1, StringUtils::lastIndexOfIgnoreCase("a b", " "));
+        $this->assertEquals(3, StringUtils::lastIndexOfIgnoreCase("aabbccdefgh", 'b'));
+        $this->assertEquals(11, StringUtils::lastIndexOfIgnoreCase("aabbccdefghcc", 'cc'));
+        $this->assertEquals(1, StringUtils::lastIndexOfIgnoreCase("aabbccdefgh", 'a'));
+        $this->assertEquals(1, StringUtils::lastIndexOfIgnoreCase("qqwweeqqwwee", 'q', 5));
+        $this->assertEquals(7, StringUtils::lastIndexOfIgnoreCase("qqwweeqqwwee", 'q', 10));
+        $this->assertEquals(7, StringUtils::lastIndexOfIgnoreCase("qqwweeqqwwee", 'q', -1));
+        $this->assertEquals(3, StringUtils::lastIndexOfIgnoreCase("aabbccdefgh", 'B'));
+        $this->assertEquals(11, StringUtils::lastIndexOfIgnoreCase("aabbccdefghcc", 'cC'));
+        $this->assertEquals(1, StringUtils::lastIndexOfIgnoreCase("aabbccdefgh", 'A'));
+        $this->assertEquals(1, StringUtils::lastIndexOfIgnoreCase("qqwweeqqwwee", 'Q', 3));
+        $this->assertEquals(7, StringUtils::lastIndexOfIgnoreCase("qqwweeqqwwee", 'Q', 0));
+        $this->assertEquals(7, StringUtils::lastIndexOfIgnoreCase("qqwweeqqwwee", 'Q', -1));
+    }
 }

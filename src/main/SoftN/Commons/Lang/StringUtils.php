@@ -214,11 +214,7 @@ class StringUtils {
     }
     
     public static function lastIndexOf(?string $value, ?string $search, int $endPos = 0): int {
-        return self::indexOfBase($value, $search, $endPos, function($value, $search, $endPos) {
-            if ($endPos > 0) {
-                $endPos = -1 * (strlen($value) - $endPos);
-            }
-            
+        return self::lastIndexOfBase($value, $search, $endPos, function($value, $search, $endPos) {
             return strrpos($value, $search, $endPos);
         });
     }
@@ -226,6 +222,22 @@ class StringUtils {
     public static function indexOfIgnoreCase(?string $value, ?string $search, int $startPos = 0): int {
         return self::indexOfBase($value, $search, $startPos, function($value, $search, $startPos) {
             return stripos($value, $search, $startPos);
+        });
+    }
+    
+    public static function lastIndexOfIgnoreCase(?string $value, ?string $search, int $endPos = 0): int {
+        return self::lastIndexOfBase($value, $search, $endPos, function($value, $search, $endPos) {
+            return strripos($value, $search, $endPos);
+        });
+    }
+    
+    private static function lastIndexOfBase(?string $value, ?string $search, int $endPos, \Closure $closure): int {
+        return self::indexOfBase($value, $search, $endPos, function($value, $search, $endPos) use ($closure) {
+            if ($endPos > 0) {
+                $endPos = -1 * (strlen($value) - $endPos);
+            }
+            
+            return $closure($value, $search, $endPos);
         });
     }
     
