@@ -195,6 +195,20 @@ class StringUtils {
         return self::compareBase(strcasecmp($first, $second), $first, $second, $nullIsLess);
     }
     
+    public static function equalsAny(?string $string, ?string... $searchStrings): bool {
+        if (ArrayUtils::isEmpty($searchStrings)) {
+            return FALSE;
+        }
+        
+        foreach ($searchStrings as $value) {
+            if (self::equals($string, $value)) {
+                return TRUE;
+            }
+        }
+        
+        return FALSE;
+    }
+    
     private static function compareBase(int $compareResult, ?string $first, ?string $second, bool $nullIsLess = TRUE): int {
         if ($compareResult === 0) {
             return 0;
