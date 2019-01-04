@@ -421,12 +421,13 @@ class StringUtilsTest extends TestCase {
     }
     
     public function testIndexOfAny() {
-        $this->assertEquals(-1, StringUtils::indexOfAny(null, null));
-        $this->assertEquals(-1, StringUtils::indexOfAny("", null));
-        $this->assertEquals(-1, StringUtils::indexOfAny(null, ""));
+        $this->assertEquals(-1, StringUtils::indexOfAny(NULL, NULL));
+        $this->assertEquals(-1, StringUtils::indexOfAny("", NULL));
+        $this->assertEquals(-1, StringUtils::indexOfAny(NULL, ""));
         $this->assertEquals(-1, StringUtils::indexOfAny("", ""));
         $this->assertEquals(-1, StringUtils::indexOfAny("aabbccaa", "z"));
         $this->assertEquals(-1, StringUtils::indexOfAny("aabbccaa", "z", "x"));
+        $this->assertEquals(-1, StringUtils::indexOfAny("abcdabcd", "e", "C"));
         $this->assertEquals(0, StringUtils::indexOfAny("aabbccaa", "a"));
         $this->assertEquals(0, StringUtils::indexOfAny("aabbccaa", "z", "a"));
         $this->assertEquals(0, StringUtils::indexOfAny("aabbccaa", "a", "c"));
