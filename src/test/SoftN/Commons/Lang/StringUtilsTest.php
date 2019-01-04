@@ -493,4 +493,20 @@ class StringUtilsTest extends TestCase {
         $this->assertTrue(StringUtils::containsNone("abc", "A"));
         $this->assertTrue(StringUtils::containsNone("ab c", "f", "g"));
     }
+    
+    public function testLastIndexOfAny() {
+        $this->assertEquals(-1, StringUtils::lastIndexOfAny(NULL, NULL));
+        $this->assertEquals(-1, StringUtils::lastIndexOfAny("", NULL));
+        $this->assertEquals(-1, StringUtils::lastIndexOfAny(NULL, ""));
+        $this->assertEquals(-1, StringUtils::lastIndexOfAny("", ""));
+        $this->assertEquals(-1, StringUtils::lastIndexOfAny("aabbccaa", "z"));
+        $this->assertEquals(-1, StringUtils::lastIndexOfAny("aabbccaa", "z", "x"));
+        $this->assertEquals(-1, StringUtils::lastIndexOfAny("abcdabcd", "e", "C"));
+        $this->assertEquals(-1, StringUtils::lastIndexOfAny("abcdabcd", ""));
+        $this->assertEquals(7, StringUtils::lastIndexOfAny("aabbccaa", "a"));
+        $this->assertEquals(7, StringUtils::lastIndexOfAny("aabbccaa", "z", "a"));
+        $this->assertEquals(7, StringUtils::lastIndexOfAny("aabbccaa", "a", "c"));
+        $this->assertEquals(5, StringUtils::lastIndexOfAny("aabbccaa", "e", "c"));
+        $this->assertEquals(6, StringUtils::lastIndexOfAny("abcdabcd", "e", "c"));
+    }
 }

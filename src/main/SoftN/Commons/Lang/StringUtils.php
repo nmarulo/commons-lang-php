@@ -244,17 +244,9 @@ class StringUtils {
     }
     
     public static function indexOfAny(?string $value, ?string... $searches): int {
-        if (ArrayUtils::isEmpty($searches)) {
-            return self::INDEX_NOT_FOUND;
-        }
-        
-        foreach ($searches as $search) {
-            if (($currentIndex = self::indexOf($value, $search)) > self::INDEX_NOT_FOUND) {
-                return $currentIndex;
-            }
-        }
-        
-        return self::INDEX_NOT_FOUND;
+        return self::indexOfAnyBase($value, function($value, $search) {
+            return self::indexOf($value, $search);
+        }, ...$searches);
     }
     
     public static function containsAny(?string $value, ?string... $searches): bool {
@@ -319,6 +311,26 @@ class StringUtils {
         }
         
         return !self::containsAny($value, ...$searches);
+    }
+    
+    public static function lastIndexOfAny(?string $value, ?string... $searches): int {
+        return self::indexOfAnyBase($value, function($value, $search) {
+            return self::lastIndexOf($value, $search);
+        }, ...$searches);
+    }
+    
+    private static function indexOfAnyBase(?string $value, \Closure $closure, ?string... $searches): int {
+        if (ArrayUtils::isEmpty($searches)) {
+            return self::INDEX_NOT_FOUND;
+        }
+        
+        foreach ($searches as $search) {
+            if (($currentIndex = $closure($value, $search)) > self::INDEX_NOT_FOUND) {
+                return $currentIndex;
+            }
+        }
+        
+        return self::INDEX_NOT_FOUND;
     }
     
     private static function lastIndexOfBase(?string $value, ?string $search, int $endPos, \Closure $closure): int {
