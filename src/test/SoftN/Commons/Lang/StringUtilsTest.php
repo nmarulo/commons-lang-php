@@ -466,4 +466,18 @@ class StringUtilsTest extends TestCase {
         $this->assertEquals(8, StringUtils::indexOfAnyBut("abcdabcde", "ab", "cd"));
         $this->assertEquals(2, StringUtils::indexOfAnyBut("ab cdabcde", "ab", "cd"));
     }
+    
+    public function testContainsOnly() {
+        $this->assertFalse(StringUtils::containsOnly(NULL, NULL));
+        $this->assertFalse(StringUtils::containsOnly("", NULL));
+        $this->assertFalse(StringUtils::containsOnly("", ""));
+        $this->assertFalse(StringUtils::containsOnly(NULL, ""));
+        $this->assertFalse(StringUtils::containsOnly("abc", "z"));
+        $this->assertFalse(StringUtils::containsOnly("abc", "A"));
+        $this->assertFalse(StringUtils::containsOnly("abc", "a"));
+        $this->assertFalse(StringUtils::containsOnly("ab c", "a", "b", "c"));
+        $this->assertTrue(StringUtils::containsOnly("abc", "a", "b", "c"));
+        $this->assertTrue(StringUtils::containsOnly("abc", "a", "b", "c", "z"));
+        $this->assertTrue(StringUtils::containsOnly("ab c", "a", "b", "c", " "));
+    }
 }
