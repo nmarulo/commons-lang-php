@@ -419,4 +419,18 @@ class StringUtilsTest extends TestCase {
         $this->assertTrue(StringUtils::containsWhitespace("abc       "));
         $this->assertTrue(StringUtils::containsWhitespace("ab    c"));
     }
+    
+    public function testIndexOfAny() {
+        $this->assertEquals(-1, StringUtils::indexOfAny(null, null));
+        $this->assertEquals(-1, StringUtils::indexOfAny("", null));
+        $this->assertEquals(-1, StringUtils::indexOfAny(null, ""));
+        $this->assertEquals(-1, StringUtils::indexOfAny("", ""));
+        $this->assertEquals(-1, StringUtils::indexOfAny("aabbccaa", "z"));
+        $this->assertEquals(-1, StringUtils::indexOfAny("aabbccaa", "z", "x"));
+        $this->assertEquals(0, StringUtils::indexOfAny("aabbccaa", "a"));
+        $this->assertEquals(0, StringUtils::indexOfAny("aabbccaa", "z", "a"));
+        $this->assertEquals(0, StringUtils::indexOfAny("aabbccaa", "a", "c"));
+        $this->assertEquals(4, StringUtils::indexOfAny("aabbccaa", "e", "c"));
+        $this->assertEquals(2, StringUtils::indexOfAny("abcdabcd", "e", "c"));
+    }
 }

@@ -243,6 +243,20 @@ class StringUtils {
         return self::contains($value, CharUtils::whitespace());
     }
     
+    public static function indexOfAny(?string $value, ?string... $searches): int {
+        if (ArrayUtils::isEmpty($searches)) {
+            return self::INDEX_NOT_FOUND;
+        }
+        
+        foreach ($searches as $search) {
+            if (($currentIndex = self::indexOf($value, $search)) > self::INDEX_NOT_FOUND) {
+                return $currentIndex;
+            }
+        }
+        
+        return self::INDEX_NOT_FOUND;
+    }
+    
     private static function lastIndexOfBase(?string $value, ?string $search, int $endPos, \Closure $closure): int {
         return self::indexOfBase($value, $search, $endPos, function($value, $search, $endPos) use ($closure) {
             if ($endPos > 0) {
