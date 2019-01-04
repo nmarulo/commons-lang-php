@@ -388,4 +388,14 @@ class StringUtilsTest extends TestCase {
         $this->assertEquals(7, StringUtils::lastIndexOfIgnoreCase("qqwweeqqwwee", 'Q', 0));
         $this->assertEquals(7, StringUtils::lastIndexOfIgnoreCase("qqwweeqqwwee", 'Q', -1));
     }
+    
+    public function testContains() {
+        $this->assertFalse(StringUtils::contains(NULL, NULL));
+        $this->assertFalse(StringUtils::contains("", NULL));
+        $this->assertFalse(StringUtils::contains("", ""));
+        $this->assertFalse(StringUtils::contains(NULL, ""));
+        $this->assertFalse(StringUtils::contains("abc", "z"));
+        $this->assertFalse(StringUtils::contains("abc", "A"));
+        $this->assertTrue(StringUtils::contains("abc", "a"));
+    }
 }

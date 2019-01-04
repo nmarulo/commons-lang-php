@@ -231,6 +231,10 @@ class StringUtils {
         });
     }
     
+    public static function contains(?string $value, ?string $search): bool {
+        return self::indexOf($value, $search) > self::INDEX_NOT_FOUND;
+    }
+    
     private static function lastIndexOfBase(?string $value, ?string $search, int $endPos, \Closure $closure): int {
         return self::indexOfBase($value, $search, $endPos, function($value, $search, $endPos) use ($closure) {
             if ($endPos > 0) {
