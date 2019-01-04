@@ -271,6 +271,40 @@ class StringUtils {
         return FALSE;
     }
     
+    public static function indexOfAnyBut(?string $value, ?string... $searches): int {
+        if (self::isEmpty($value) || ArrayUtils::isEmpty($searches)) {
+            return self::INDEX_NOT_FOUND;
+        }
+        
+        $indexFound = [];
+        
+        foreach ($searches as $search) {
+            $startIndex = 0;
+            
+            while (($startIndex = self::indexOf($value, $search, $startIndex)) > self::INDEX_NOT_FOUND) {
+                $endRange   = $startIndex + (strlen($search) - 1);
+                $indexFound = array_merge($indexFound, range($startIndex, $endRange));
+                ++$startIndex;
+            }
+        }
+        
+        if (ArrayUtils::isEmpty($indexFound)) {
+            return 0;
+        }
+        
+        $lenValue = strlen($value);
+        
+        for ($i = 0; $i < $lenValue; ++$i) {
+            if (in_array($i, $indexFound)) {
+                continue;
+            }
+            
+            return $i;
+        }
+        
+        return self::INDEX_NOT_FOUND;
+    }
+    
     private static function lastIndexOfBase(?string $value, ?string $search, int $endPos, \Closure $closure): int {
         return self::indexOfBase($value, $search, $endPos, function($value, $search, $endPos) use ($closure) {
             if ($endPos > 0) {

@@ -449,4 +449,21 @@ class StringUtilsTest extends TestCase {
         $this->assertTrue(StringUtils::containsAny("aabbccaa", "e", "c"));
         $this->assertTrue(StringUtils::containsAny("abcdabcd", "e", "c"));
     }
+    
+    public function testIndexOfAnyBut() {
+        $this->assertEquals(-1, StringUtils::indexOfAnyBut(NULL, NULL));
+        $this->assertEquals(-1, StringUtils::indexOfAnyBut("", NULL));
+        $this->assertEquals(-1, StringUtils::indexOfAnyBut(NULL, ""));
+        $this->assertEquals(-1, StringUtils::indexOfAnyBut("", ""));
+        $this->assertEquals(0, StringUtils::indexOfAnyBut("aabbccaa", "z"));
+        $this->assertEquals(0, StringUtils::indexOfAnyBut("aabbccaa", "z", "x"));
+        $this->assertEquals(0, StringUtils::indexOfAnyBut("abcdabcd", "e", "C"));
+        $this->assertEquals(2, StringUtils::indexOfAnyBut("aabbccaa", "a"));
+        $this->assertEquals(2, StringUtils::indexOfAnyBut("aabbccaa", "z", "a"));
+        $this->assertEquals(4, StringUtils::indexOfAnyBut("aabbccaa", "a", "b"));
+        $this->assertEquals(0, StringUtils::indexOfAnyBut("aabbccaa", "A", "b"));
+        $this->assertEquals(3, StringUtils::indexOfAnyBut("abcdabcd", "ab", "c"));
+        $this->assertEquals(8, StringUtils::indexOfAnyBut("abcdabcde", "ab", "cd"));
+        $this->assertEquals(2, StringUtils::indexOfAnyBut("ab cdabcde", "ab", "cd"));
+    }
 }
