@@ -313,6 +313,14 @@ class StringUtils {
         return self::indexOfAnyBut($value, ...$valid) == self::INDEX_NOT_FOUND;
     }
     
+    public static function containsNone(?string $value, ?string... $searches): bool {
+        if (self::isEmpty($value) || ArrayUtils::isEmpty($searches)) {
+            return FALSE;
+        }
+        
+        return !self::containsAny($value, ...$searches);
+    }
+    
     private static function lastIndexOfBase(?string $value, ?string $search, int $endPos, \Closure $closure): int {
         return self::indexOfBase($value, $search, $endPos, function($value, $search, $endPos) use ($closure) {
             if ($endPos > 0) {

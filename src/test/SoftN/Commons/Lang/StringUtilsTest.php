@@ -480,4 +480,17 @@ class StringUtilsTest extends TestCase {
         $this->assertTrue(StringUtils::containsOnly("abc", "a", "b", "c", "z"));
         $this->assertTrue(StringUtils::containsOnly("ab c", "a", "b", "c", " "));
     }
+    
+    public function testContainsNone() {
+        $this->assertFalse(StringUtils::containsNone(NULL, NULL));
+        $this->assertFalse(StringUtils::containsNone("", NULL));
+        $this->assertFalse(StringUtils::containsNone("", ""));
+        $this->assertFalse(StringUtils::containsNone(NULL, ""));
+        $this->assertFalse(StringUtils::containsNone("abc", "a"));
+        $this->assertFalse(StringUtils::containsNone("abc", "m", "c"));
+        $this->assertFalse(StringUtils::containsNone("ab c", " "));
+        $this->assertTrue(StringUtils::containsNone("abc", "z"));
+        $this->assertTrue(StringUtils::containsNone("abc", "A"));
+        $this->assertTrue(StringUtils::containsNone("ab c", "f", "g"));
+    }
 }
