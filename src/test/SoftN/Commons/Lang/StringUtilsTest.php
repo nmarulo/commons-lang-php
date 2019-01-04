@@ -408,4 +408,15 @@ class StringUtilsTest extends TestCase {
         $this->assertTrue(StringUtils::containsIgnoreCase("abc", "A"));
         $this->assertTrue(StringUtils::containsIgnoreCase("abc", "a"));
     }
+    
+    public function testContainsWhitespace() {
+        $this->assertFalse(StringUtils::containsWhitespace(NULL));
+        $this->assertFalse(StringUtils::containsWhitespace(""));
+        $this->assertFalse(StringUtils::containsWhitespace(NULL));
+        $this->assertFalse(StringUtils::containsWhitespace("abc"));
+        $this->assertTrue(StringUtils::containsWhitespace("ab c"));
+        $this->assertTrue(StringUtils::containsWhitespace("      abc"));
+        $this->assertTrue(StringUtils::containsWhitespace("abc       "));
+        $this->assertTrue(StringUtils::containsWhitespace("ab    c"));
+    }
 }
