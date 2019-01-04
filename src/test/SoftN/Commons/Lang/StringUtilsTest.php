@@ -433,4 +433,19 @@ class StringUtilsTest extends TestCase {
         $this->assertEquals(4, StringUtils::indexOfAny("aabbccaa", "e", "c"));
         $this->assertEquals(2, StringUtils::indexOfAny("abcdabcd", "e", "c"));
     }
+    
+    public function testContainsAny() {
+        $this->assertFalse(StringUtils::containsAny(NULL, NULL));
+        $this->assertFalse(StringUtils::containsAny("", NULL));
+        $this->assertFalse(StringUtils::containsAny(NULL, ""));
+        $this->assertFalse(StringUtils::containsAny("", ""));
+        $this->assertFalse(StringUtils::containsAny("aabbccaa", "z"));
+        $this->assertFalse(StringUtils::containsAny("aabbccaa", "z", "x"));
+        $this->assertFalse(StringUtils::containsAny("abcdabcd", "e", "C"));
+        $this->assertTrue(StringUtils::containsAny("aabbccaa", "a"));
+        $this->assertTrue(StringUtils::containsAny("aabbccaa", "z", "a"));
+        $this->assertTrue(StringUtils::containsAny("aabbccaa", "a", "c"));
+        $this->assertTrue(StringUtils::containsAny("aabbccaa", "e", "c"));
+        $this->assertTrue(StringUtils::containsAny("abcdabcd", "e", "c"));
+    }
 }

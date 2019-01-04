@@ -257,6 +257,20 @@ class StringUtils {
         return self::INDEX_NOT_FOUND;
     }
     
+    public static function containsAny(?string $value, ?string... $searches): bool {
+        if (ArrayUtils::isEmpty($searches)) {
+            return FALSE;
+        }
+        
+        foreach ($searches as $search) {
+            if (self::contains($value, $search)) {
+                return TRUE;
+            }
+        }
+        
+        return FALSE;
+    }
+    
     private static function lastIndexOfBase(?string $value, ?string $search, int $endPos, \Closure $closure): int {
         return self::indexOfBase($value, $search, $endPos, function($value, $search, $endPos) use ($closure) {
             if ($endPos > 0) {
