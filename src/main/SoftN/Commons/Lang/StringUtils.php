@@ -235,6 +235,10 @@ class StringUtils {
         return self::indexOf($value, $search) > self::INDEX_NOT_FOUND;
     }
     
+    public static function containsIgnoreCase(?string $value, ?string $search): bool {
+        return self::indexOfIgnoreCase($value, $search) > self::INDEX_NOT_FOUND;
+    }
+    
     private static function lastIndexOfBase(?string $value, ?string $search, int $endPos, \Closure $closure): int {
         return self::indexOfBase($value, $search, $endPos, function($value, $search, $endPos) use ($closure) {
             if ($endPos > 0) {

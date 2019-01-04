@@ -398,4 +398,14 @@ class StringUtilsTest extends TestCase {
         $this->assertFalse(StringUtils::contains("abc", "A"));
         $this->assertTrue(StringUtils::contains("abc", "a"));
     }
+    
+    public function testContainsIgnoreCase() {
+        $this->assertFalse(StringUtils::containsIgnoreCase(NULL, NULL));
+        $this->assertFalse(StringUtils::containsIgnoreCase("", NULL));
+        $this->assertFalse(StringUtils::containsIgnoreCase("", ""));
+        $this->assertFalse(StringUtils::containsIgnoreCase(NULL, ""));
+        $this->assertFalse(StringUtils::containsIgnoreCase("abc", "z"));
+        $this->assertTrue(StringUtils::containsIgnoreCase("abc", "A"));
+        $this->assertTrue(StringUtils::containsIgnoreCase("abc", "a"));
+    }
 }
