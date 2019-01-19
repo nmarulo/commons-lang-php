@@ -518,4 +518,13 @@ class StringUtilsTest extends TestCase {
         $this->assertEquals("abc", StringUtils::left("abc", 4));
         $this->assertEquals("", StringUtils::left("abc", -4));
     }
+    
+    public function testRight() {
+        $this->assertEquals(NULL, StringUtils::right(NULL, 5));
+        $this->assertEquals("", StringUtils::right("", 4));
+        $this->assertEquals("", StringUtils::right("abcd", 0));
+        $this->assertEquals("cd", StringUtils::right("abcd", 2));
+        $this->assertEquals("abc", StringUtils::right("abc", 4));
+        $this->assertEquals("", StringUtils::right("abc", -4));
+    }
 }

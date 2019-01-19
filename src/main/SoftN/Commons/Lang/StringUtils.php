@@ -320,6 +320,18 @@ class StringUtils {
     }
     
     public static function left(?string $value, int $len): ?string {
+        return self::substrBase($value, $len, function($value, $len) {
+            return substr($value, 0, $len);
+        });
+    }
+    
+    public static function right(?string $value, int $len): ?string {
+        return self::substrBase($value, $len, function($value, $len) {
+            return substr($value, strlen($value) - $len);
+        });
+    }
+    
+    private static function substrBase(?string $value, int $len, \Closure $closure): ?string {
         if (self::isEmpty($value) || $len > strlen($value)) {
             return $value;
         }
@@ -328,7 +340,7 @@ class StringUtils {
             return CharUtils::EMPTY;
         }
         
-        return substr($value, 0, $len);
+        return $closure($value, $len);
     }
     
     private static function indexOfAnyBase(?string $value, \Closure $closure, ?string... $searches): int {
