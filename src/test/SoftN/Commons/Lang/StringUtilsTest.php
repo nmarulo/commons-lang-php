@@ -509,4 +509,13 @@ class StringUtilsTest extends TestCase {
         $this->assertEquals(5, StringUtils::lastIndexOfAny("aabbccaa", "e", "c"));
         $this->assertEquals(6, StringUtils::lastIndexOfAny("abcdabcd", "e", "c"));
     }
+    
+    public function testLeft() {
+        $this->assertEquals(NULL, StringUtils::left(NULL, 5));
+        $this->assertEquals("", StringUtils::left("", 4));
+        $this->assertEquals("", StringUtils::left("abcd", 0));
+        $this->assertEquals("ab", StringUtils::left("abcd", 2));
+        $this->assertEquals("abc", StringUtils::left("abc", 4));
+        $this->assertEquals("", StringUtils::left("abc", -4));
+    }
 }

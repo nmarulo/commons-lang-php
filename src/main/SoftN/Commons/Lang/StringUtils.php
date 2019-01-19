@@ -319,6 +319,18 @@ class StringUtils {
         }, ...$searches);
     }
     
+    public static function left(?string $value, int $len): ?string {
+        if (self::isEmpty($value) || $len > strlen($value)) {
+            return $value;
+        }
+        
+        if ($len < 0) {
+            return CharUtils::EMPTY;
+        }
+        
+        return substr($value, 0, $len);
+    }
+    
     private static function indexOfAnyBase(?string $value, \Closure $closure, ?string... $searches): int {
         if (ArrayUtils::isEmpty($searches)) {
             return self::INDEX_NOT_FOUND;
